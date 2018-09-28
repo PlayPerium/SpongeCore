@@ -4,6 +4,9 @@ plugins {
 
 group = pluginGroup
 version = pluginVersion
+archivesBaseName = "SpongeCore"
+
+compileJava.options.encoding = "UTF-8"
 
 dependencies {
     compile 'org.spongepowered:spongeapi:7.0.0'
