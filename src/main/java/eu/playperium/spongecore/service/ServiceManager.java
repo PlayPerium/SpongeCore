@@ -10,16 +10,12 @@ import java.util.ArrayList;
 public class ServiceManager {
 
     private ArrayList<InternalService> internalServices = new ArrayList<>();
-    
-    public ServiceManager() {
-        this.loadServices();
-    }
 
     public void registerInternalService(InternalService service) {
         internalServices.add(service);
     }
     
-    private void loadServices() {
+    public void loadServices() {
         for (InternalService service: internalServices) {
             service.execute();
         }
