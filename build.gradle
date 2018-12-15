@@ -1,6 +1,23 @@
+buildscript {
+    ext.kotlin_version = '1.3.11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version'
+    }
+
+}
+
 plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.11'
+    id 'com.github.johnrengelman.shadow' version '4.0.3'
     id 'org.spongepowered.plugin' version '0.8.1'
 }
+
+apply plugin: 'kotlin'
 
 group = pluginGroup
 version = pluginVersion
@@ -9,7 +26,14 @@ archivesBaseName = "SpongeCore"
 compileJava.options.encoding = "UTF-8"
 
 dependencies {
+    shadow 'org.jetbrains.kotlin:kotlin-stdlib'
     compile 'org.spongepowered:spongeapi:7.0.0'
 }
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+}
+
+build.dependsOn shadowJar
 
 sponge.plugin.id = pluginId
