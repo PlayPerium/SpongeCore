@@ -5,6 +5,6 @@
  */
 package eu.playperium.spongecore.configuration
 
-class ConfigOption(val defaultValue: String?, vararg path: Any) {
+class ConfigOption(val defaultValue: Any?, vararg path: Any) {
     val path: Array<out Any> = path
 }

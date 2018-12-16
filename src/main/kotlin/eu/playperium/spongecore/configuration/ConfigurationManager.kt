@@ -18,7 +18,9 @@ class ConfigurationManager(configurationFile: File, configurationLoader: Configu
     private val configOptions: ArrayList<ConfigOption> = ArrayList()
 
     fun registerConfigOption(option: ConfigOption) {
-        configOptions.add(option)
+        if (!configOptions.contains(option)) {
+            configOptions.add(option)
+        }
     }
 
     fun setConfigOptions() {
@@ -26,7 +28,7 @@ class ConfigurationManager(configurationFile: File, configurationLoader: Configu
             configurationFile.createNewFile()
 
             for (option: ConfigOption in configOptions) {
-                configurationNode.getNode(option.path).value = option.defaultValue
+                configurationNode.getNode(*option.path).value = option.defaultValue
             }
 
             configurationLoader.save(this.configurationNode)
@@ -39,26 +41,26 @@ class ConfigurationManager(configurationFile: File, configurationLoader: Configu
     }
 
     fun getString (option: ConfigOption): String {
-        return this.configurationNode.getNode(option.path).string
+        return this.configurationNode.getNode(*option.path).string
     }
 
     fun getFloat(option: ConfigOption): Float {
-        return this.configurationNode.getNode(option.path).float
+        return this.configurationNode.getNode(*option.path).float
     }
 
     fun getDouble(option: ConfigOption): Double {
-        return this.configurationNode.getNode(option.path).double
+        return this.configurationNode.getNode(*option.path).double
     }
 
     fun getInt(option: ConfigOption): Int {
-        return this.configurationNode.getNode(option.path).int
+        return this.configurationNode.getNode(*option.path).int
     }
 
     fun getLong(option: ConfigOption): Long {
-        return this.configurationNode.getNode(option.path).long
+        return this.configurationNode.getNode(*option.path).long
     }
 
     fun getBoolean(option: ConfigOption): Boolean {
-        return this.configurationNode.getNode(option.path).boolean
+        return this.configurationNode.getNode(*option.path).boolean
     }
 }
